@@ -1,52 +1,42 @@
 # vector_ros
-This repository contains an *unofficial* ROS package for [Anki Vector](https://www.anki.com/en-us/vector) that I started as a small side project after finishing several online ROS courses. This package is essentially a wrapping of core Vector functions from [Vector Python SDK](https://github.com/anki/vector-python-sdk) as ROS topics, services and actions(full list below). In order to showcase the package I wrote a simple [red ball tracking node](https://github.com/betab0t/vector_ros/blob/develop/nodes/simple_ball_tracker_node.py) which subscribes to the camera feed coming from Vector, locates the red ball using cv_bridge/OpenCV and publish Twist messages to move the robot accurdenly as you can see in the following video:
-
-<p align="center">
-  <a target="_blank" href="http://www.youtube.com/watch?v=XxaOyA-M3U4">
-    <img src="http://img.youtube.com/vi/XxaOyA-M3U4/0.jpg">
-  </a>
-</p>
+This repository contains an *unofficial* ROS package for [Anki Vector](https://www.anki.com/en-us/vector). This package is essentially a wrapping of core Vector functions from [Vector Python SDK](https://github.com/anki/vector-python-sdk) as ROS topics, services and actions(full list below). THe original repository is that we forked from is [here](https://github.com/betab0t/vector_ros/) 
 
 # Setup
-## Requirements(non Docker setup)
-- ROS Melodic with Python 3.6 installed
+
+## Requirements
+- ROS Melodic with Python 3.7.7 or higher installed
 - [Vector Python SDK](https://github.com/anki/vector-python-sdk)
 - [diff_drive](https://github.com/merose/diff_drive) package
 
-## Docker Image
-It's highly recommended to use the supplied Dockerfile insted of installing directly on your machine mainly because of the tricky setup required to run Python 3 properly on ROS. follow the instructions:
-1. Install [Docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04) and [docker-compose](https://docs.docker.com/compose/install/) if you dont have it already installed
+## Virtual Environment
+It's highly recommended to use a virtual environment in order to run Python 3 properly on ROS. Follow the instructions:
+1. Install virtualenv 
 ```sh
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-sudo apt-get update
-sudo apt-get install -y docker-ce
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Get virtualenv package
+sudo apt update
+sudo apt install python3-dev python3-pip
+sudo pip3 install -U virtualenv
+
+# Verify installation
+python3 --version
+pip3 --version
+virtualenv --version
+
+# Make python3 virtual environment
+virtualenv --system-site-packages -p python3 ./venv
+source ./venv/bin/activate  # sh, bash, ksh, or zsh
+pip install --upgrade pip
+pip list  # show packages installed within the virtual environment
+deactivate  # don't exit until you're done running code
 ```
 
-2. Clone this repository and create docker-compose file from template
+2. Install Vector SDK
+Follow the instructions listed [here](https://developer.anki.com/vector/docs/install-linux.html). *Make sure to use your [Anki Developer](https://developer.anki.com/) username and password*
+
+3. Clone this repository
 ```sh
 git clone https://github.com/betab0t/vector_ros
-cd vector_ros
-cp docker-compose-TEMPLATE.yml docker-compose.yml
-nano docker-compose.yml
 ```
-
-3. Edit the following lines and save
-```yaml
-vector_ip: <VECTOR_IP>
-vector_name: <VECTOR_NAME>
-vector_serial: <VECTOR_SERIAL> 
-```
-*Not sure how to get this info? see FAQ section below*
-
-4. Build and start the container
-```sh
-sudo docker-compose build --build-arg anki_user_email=<ANKI_ACCOUNT_EMAIL> --build-arg anki_user_password=<ANKI_ACCOUNT_PASSWORD>
-sudo docker-compose up
-```
-*Use your [Anki Developer](https://developer.anki.com/) username and password*
 
 # Topics
 * `/vector/camera`  *(sensor_msgs/Image)*
