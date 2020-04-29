@@ -11,11 +11,13 @@ This repository contains an *unofficial* ROS package for [Anki Vector](https://w
 ## Virtual Environment
 It's highly recommended to use a virtual environment in order to run Python 3 properly on ROS. Follow the instructions:
 1. Clone this repository
+
 ```sh
 git clone https://github.com/betab0t/vector_ros
 ```
 
 2. Install virtualenv 
+
 ```sh
 # Get virtualenv package
 sudo apt update
@@ -37,6 +39,7 @@ deactivate  # don't exit until you're done running code
 ```
 
 3. Install Vector SDK
+
 Follow the instructions listed [here](https://developer.anki.com/vector/docs/install-linux.html). *Make sure to use your [Anki Developer](https://developer.anki.com/) username and password*
 
 # Topics
