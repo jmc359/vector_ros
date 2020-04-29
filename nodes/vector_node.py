@@ -23,7 +23,9 @@ if __name__=="__main__":
         async_robot = mock_robot.MockRobot()
 
     else:
-        async_robot = anki_vector.AsyncRobot(enable_camera_feed=True)
+        full_param_name = rospy.search_param('serial')
+        serial = rospy.get_param(full_param_name)
+        async_robot = anki_vector.AsyncRobot(enable_camera_feed=True, serial=serial)
 
     # connect to Vector
     async_robot.connect()

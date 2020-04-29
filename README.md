@@ -12,13 +12,13 @@ This repository contains an *unofficial* ROS package for [Anki Vector](https://w
 It's highly recommended to use a virtual environment in order to run Python 3 properly on ROS. Follow the instructions:
 1. Clone this repository
 
-```sh
+```bash
 git clone https://github.com/betab0t/vector_ros
 ```
 
 2. Install virtualenv 
 
-```sh
+```bash
 # Get virtualenv package
 sudo apt update
 sudo apt install python3-dev python3-pip
@@ -82,31 +82,32 @@ Right wheel rotation rate. used by [diff_drive](https://github.com/merose/diff_d
 Play animation by name.
 
 # Examples
+## Run the following (with your Vector's serial number substituted) to make topics available for subscribing and publishing messages to Vector
+```bash
+roslaunch vector_ros vector.launch serial:="<serial number>"
+```
+
 ## View single image from camera
-```sh
-beta_b0t@home:~$ rosrun image_view image_saver image:=/vector/camera
+```bash
+rosrun image_view image_saver image:=/vector/camera
 [ INFO] [1550425113.646567813]: Saved image left0000.jpg
 [ INFO] [1550425113.752592532]: Saved image left0001.jpg
 [ INFO] [1550425113.848999553]: Saved image left0002.jpg
-...
-(Ctrl+C)
-...
-beta_b0t@home:~$ eog left0000.jpg
 ```
 
 ## Set head angle
-```sh
-beta_b0t@home:~$ rosservice call /vector/set_head_angle "deg: 45.0"
+```bash
+rosservice call /vector/set_head_angle "deg: 45.0"
 ```
 
 ## Say text
-```sh
-beta_b0t@home:~$ rosservice call /vector/say_text "text: 'hello world'"
+```bash
+rosservice call /vector/say_text "text: 'hello world'"
 ```
 
 ## Play animation 
-```sh
-beta_b0t@home:~$ rostopic pub /vector/play_animation/goal vector_ros/PlayAnimationActionGoal "header:
+```bash
+rostopic pub /vector/play_animation/goal vector_ros/PlayAnimationActionGoal "header:
   seq: 0
   stamp:
     secs: 0

@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <!-- Setup virtual environment -->
+    <arg name="serial"/>
     <arg name="python3_version" default="7" />
     <arg name="python3_venv_path" default="$(find vector_ros)/envs/venv" />
     <arg name='pythonpackage_path' default="/usr/lib/python3$(arg python3_version).zip:$(arg python3_venv_path)/lib/python3.$(arg python3_version)/site-packages"/>
@@ -20,6 +21,7 @@
     <arg name="wheel_separation" value="0.055" />
 
     <node pkg="vector_ros" type="vector_node.py" name="vector" output="screen">
+        <param name="serial" value="$(arg serial)"/>
         <remap from="~lwheel_desired_rate" to="lwheel_desired_rate" />
         <remap from="~rwheel_desired_rate" to="rwheel_desired_rate" />
         <remap from="~lwheel_ticks" to="lwheel_ticks" />
