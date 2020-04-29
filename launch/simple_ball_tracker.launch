@@ -1,4 +1,10 @@
+<?xml version="1.0"?>
 <launch>
+	<!-- Setup virtual environment -->
+	<arg name="python3_version" default="6" />
+	<arg name="python3_venv_path" default="$(find cozmo_driver)/envs/venv" />
+	<arg name='pythonpackage_path' default="/usr/lib/python3$(arg python3_version).zip:$(arg python3_venv_path)/lib/python3.$(arg python3_version)/site-packages"/>
+
     <include file="$(find vector_ros)/launch/vector.launch"/>
     <node pkg="vector_ros" type="simple_ball_tracker_node.py" name="simple_ball_tracker"/>
 </launch>

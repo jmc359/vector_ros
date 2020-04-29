@@ -10,7 +10,12 @@ This repository contains an *unofficial* ROS package for [Anki Vector](https://w
 
 ## Virtual Environment
 It's highly recommended to use a virtual environment in order to run Python 3 properly on ROS. Follow the instructions:
-1. Install virtualenv 
+1. Clone this repository
+```sh
+git clone https://github.com/betab0t/vector_ros
+```
+
+2. Install virtualenv 
 ```sh
 # Get virtualenv package
 sudo apt update
@@ -23,20 +28,16 @@ pip3 --version
 virtualenv --version
 
 # Make python3 virtual environment
-virtualenv --system-site-packages -p python3 ./venv
-source ./venv/bin/activate  # sh, bash, ksh, or zsh
+cd vector_ros
+virtualenv --system-site-packages -p python3 envs/venv
+source envs/venv/bin/activate  # sh, bash, ksh, or zsh
 pip install --upgrade pip
 pip list  # show packages installed within the virtual environment
 deactivate  # don't exit until you're done running code
 ```
 
-2. Install Vector SDK
+3. Install Vector SDK
 Follow the instructions listed [here](https://developer.anki.com/vector/docs/install-linux.html). *Make sure to use your [Anki Developer](https://developer.anki.com/) username and password*
-
-3. Clone this repository
-```sh
-git clone https://github.com/betab0t/vector_ros
-```
 
 # Topics
 * `/vector/camera`  *(sensor_msgs/Image)*

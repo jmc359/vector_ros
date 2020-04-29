@@ -1,4 +1,10 @@
+<?xml version="1.0"?>
 <launch>
+    <!-- Setup virtual environment -->
+    <arg name="python3_version" default="7" />
+    <arg name="python3_venv_path" default="$(find vector_ros)/envs/venv" />
+    <arg name='pythonpackage_path' default="/usr/lib/python3$(arg python3_version).zip:$(arg python3_venv_path)/lib/python3.$(arg python3_version)/site-packages"/>
+
     <arg name="model" default="$(find vector_ros)/urdf/vector.urdf.xacro" />
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
 
